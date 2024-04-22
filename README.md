@@ -1,4 +1,5 @@
-# ⚠️ This project is no longer maintained
+# ⚠️ This project is no longer actively maintained
+Latest fix I made was to add unofficial "support" for WHMCS 8.9 with PHP 8.1. Check the latest commit to verify changes. I am not planning to add any features or fix additional bugs, unless further compatibility errors arrise.
 
 # WHMCS Order Management Addon
 WHMCS module to automate several order management tasks. Here are the following tasks currently automated:
@@ -7,8 +8,5 @@ WHMCS module to automate several order management tasks. Here are the following 
 - Accept order on successful payment
 
 # Installation
-1. Download the [latest release](https://github.com/dylanhansch/whmcs-order-management/releases/latest).
+1. Download the latest release.
 2. Copy the "order_management" folder to your WHMCS installation (located within "modules/addons/").
-
-# Contributions
-Feel free to fork the repo, make changes, then create a pull request! For ideas on what you can help with, check the project issues.

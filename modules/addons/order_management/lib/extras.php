@@ -49,25 +49,29 @@ function acceptPaidPendingOrdersIsEnabled() {
  * @return bool
  */
 function isSettingOn($setting) {
-	$isEnabled = true;
+    $isEnabled = true;
 
-	try {
-		$query = Capsule::table('tbladdonmodules')
-			->select('value')
-			->where('module', 'order_management')
-			->where('setting', $setting)
-			->first();
+    try {
+        $query = Capsule::table('tbladdonmodules')
+                        ->select('value')
+                        ->where('module', 'order_management')
+                        ->where('setting', $setting)
+                        ->first();
 
-		$result = trim($query->value);
+        if ($query) {
+            $result = trim($query->value);
+            // Check if the result is an empty string which means setting is "off"
+            if ($result === '') {
+                $isEnabled = false;
+            }
+        } else {
+            // No setting found in the database, default to true as specified
+            $isEnabled = true;
+        }
+    } catch (\Exception $e) {
+        logActivity('[Order Management] ' . $e);
+    }
 
-		// When there is no entry in the database, $result == ''.
-		// This way when there is no entry in the database, the default is "true".
-		if (count($query) == 1 && $result == '') {
-			$isEnabled = false;
-		}
-	} catch (\Exception $e) {
-		logActivity('[Order Management] ' . $e);
-	}
-
-	return $isEnabled;
+    return $isEnabled;
 }
+
